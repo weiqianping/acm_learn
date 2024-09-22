@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'acmlearn_cms.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'acmlearn',
+        'USER': 'acmlearn',
+        'PASSWORD': 'SajhGWSYRfpnaeNd',
+        'HOST': '124.222.94.181',
+        'PORT': '3306',
     }
 }
 
