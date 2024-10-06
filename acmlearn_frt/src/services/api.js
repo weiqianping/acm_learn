@@ -27,7 +27,6 @@ axiosInstance.interceptors.response.use(response=>{
 
 export default{
     //NavBar
-    //登录
     async login(email,username,password){
         try{
             const response=await axiosInstance.post('login/',{
@@ -41,7 +40,6 @@ export default{
             throw error;
         }
     },
-    //注册
     async register(email,username,password,code){
         try{
             const response=await axiosInstance.post('register/',{

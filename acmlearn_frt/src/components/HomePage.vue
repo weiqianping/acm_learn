@@ -1,13 +1,15 @@
 <template>
+    <div>
+      <h1>首页</h1>
+    </div>
+  </template>
   
-</template>
-
-<script>
-export default {
-
-}
-</script>
-
-<style>
-
-</style>
+  <script>
+  export default {
+  
+  }
+  </script>
+  
+  <style>
+  
+  </style>
