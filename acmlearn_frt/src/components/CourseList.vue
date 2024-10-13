@@ -48,9 +48,17 @@
       <el-col>
         <el-table :data="filteredCourses" style="width: 100%">
           <el-table-column prop="name" label="课程名称" />
-          <el-table-column prop="category" label="类别" />
+          <el-table-column prop="categories" label="类别">
+            <template #default="scope">
+              {{ scope.row.categories.join(', ') }}
+            </template>
+          </el-table-column>
           <el-table-column prop="difficulty" label="难度" />
-          <el-table-column prop="knowledgePoint" label="知识点" />
+          <el-table-column prop="knowledgePoints" label="知识点">
+            <template #default="scope">
+              {{ scope.row.knowledgePoints.join(', ') }}
+            </template>
+          </el-table-column>
         </el-table>
       </el-col>
     </el-row>
@@ -81,10 +89,11 @@ export default {
         { id: '4', name: 'SEO' },
       ],
       courses: [
-        { name: 'JavaScript基础', category: '编程', difficulty: '初级', knowledgePoint: 'JavaScript' },
-        { name: 'HTML/CSS入门', category: '编程', difficulty: '初级', knowledgePoint: 'HTML/CSS' },
-        { name: 'UI设计基础', category: '设计', difficulty: '中级', knowledgePoint: 'UI设计' },
-        { name: 'SEO优化', category: '市场营销', difficulty: '高级', knowledgePoint: 'SEO' },
+        { name: 'JavaScript基础', categories: ['编程'], difficulty: '初级', knowledgePoints: ['JavaScript'] },
+        { name: 'HTML/CSS入门', categories: ['编程'], difficulty: '初级', knowledgePoints: ['HTML/CSS'] },
+        { name: 'UI设计基础', categories: ['设计'], difficulty: '中级', knowledgePoints: ['UI设计'] },
+        { name: 'SEO优化', categories: ['市场营销'], difficulty: '高级', knowledgePoints: ['SEO'] },
+        { name: '全栈开发', categories: ['编程', '设计'], difficulty: '中级', knowledgePoints: ['JavaScript', 'HTML/CSS', 'UI设计'] },
       ],
       selectedTags: [],
     };
@@ -92,10 +101,21 @@ export default {
   computed: {
     filteredCourses() {
       return this.courses.filter(course => {
-        const categoryMatch = !this.selectedCategory || course.category === this.selectedCategory;
-        const difficultyMatch = !this.selectedDifficulty || course.difficulty === this.selectedDifficulty;
-        const knowledgePointMatch = !this.selectedKnowledgePoint || course.knowledgePoint === this.selectedKnowledgePoint;
-        return categoryMatch && difficultyMatch && knowledgePointMatch;
+        //const categoryMatch = !this.selectedCategory || course.categories.includes(this.selectedCategory);
+        //const difficultyMatch = !this.selectedDifficulty || course.difficulty === this.selectedDifficulty;
+        //const knowledgePointMatch = !this.selectedKnowledgePoint || course.knowledgePoints.includes(this.selectedKnowledgePoint);
+        const tagsMatch = this.selectedTags.every(tag => {
+          if (tag.type === 'category') {
+            return course.categories.includes(tag.value);
+          } else if (tag.type === 'difficulty') {
+            return course.difficulty === tag.value;
+          } else if (tag.type === 'knowledgePoint') {
+            return course.knowledgePoints.includes(tag.value);
+          }
+          return false;
+        });
+        //return categoryMatch && difficultyMatch && knowledgePointMatch && tagsMatch;
+        return tagsMatch;
       });
     },
   },
