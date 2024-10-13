@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 #https://blog.csdn.net/happygjcd/article/details/102649947
+#https://pythondjango.cn/django/rest-framework-tutorials
 class UserProfile(AbstractUser):
     avatar_url = models.URLField(null=True, blank=True)
     avatar = models.ImageField(upload_to='avatar/', null=True, blank=True)
