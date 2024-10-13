@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Courses,Chapters,Videoes,Categories,Knowledges
 from Profiles.models import TeachersProfile
-from Profiles.serializers import TeacherProfileSerializer
+from Profiles.serializers import TeachersProfileSerializer
 
 class CategoriesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,7 +14,7 @@ class KnowledgesSerializer(serializers.ModelSerializer):
         fields=('id','name','description')
 
 class CoursesSerializer(serializers.ModelSerializer):
-    teacher=TeacherProfileSerializer()
+    teacher=TeachersProfileSerializer()
     category=CategoriesSerializer()
     class Meta:
         model=Courses

@@ -44,6 +44,14 @@ INSTALLED_APPS = [
     'Profiles',
     'Courses',
 ]
+
+#配置JWT 认证 徐王晶
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
 #drf_yasg:用来查看api设计
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
