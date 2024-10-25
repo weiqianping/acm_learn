@@ -8,6 +8,7 @@ from .models import EmailVerifyRecord, UserProfile
 from .serializers import UserProfileSerializer, EmailVerifyRecordSerializer
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
+from rest_framework.authtoken.models import Token
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -80,5 +81,11 @@ def login(request):
     
     user = authenticate(username=username, password=password)
     if user:
-        return Response({'message': '登录成功'}, status=status.HTTP_200_OK)
+        # 创建或获取 Token
+        token, created = Token.objects.get_or_create(user=user)
+        #print(token.key
+        # 使用序列化器将 user 对象转换为 JSON 格式
+        userprofile_serializer = UserProfileSerializer(user)
+        return Response({"token": token.key, "user": userprofile_serializer.data}, status=status.HTTP_200_OK)
+        #return Response({'message': '登录成功'}, status=status.HTTP_200_OK)
     return Response({'error': '用户名或密码错误'}, status=status.HTTP_400_BAD_REQUEST)

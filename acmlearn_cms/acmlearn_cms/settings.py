@@ -40,17 +40,27 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
     'drf_yasg',
     'Profiles',
     'Courses',
 ]
 
+#安装django-cors-headers,配置CORS 策略，实现跨域资源共享，添加app'corsheaders',在MIDDLEWARE中添加'corsheaders.middleware.CorsMiddleware',和 'django.middleware.common.CommonMiddleware',
+#安装pip install djangorestframework djangorestframework-simplejwt,正确配置Token模型,添加app'rest_framework','rest_framework.authtoken',
+
 #配置JWT 认证 徐王晶
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        #'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ),
 }
+
+
+
+
 
 #drf_yasg:用来查看api设计
 MIDDLEWARE = [
@@ -61,6 +71,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+# 允许所有域名访问
+CORS_ALLOW_ALL_ORIGINS = True
+
+# 或者指定允许的域名
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # 前端开发服务器
+    "http://127.0.0.1:3000",  # 前端开发服务器
+    "http://yourdomain.com",  # 生产环境域名
 ]
 
 ROOT_URLCONF = 'acmlearn_cms.urls'

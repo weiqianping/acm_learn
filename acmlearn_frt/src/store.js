@@ -12,7 +12,7 @@ export function useStore(){
         state.isLoggedIn=true;
         state.username=user.username;
         state.avatar_url=user.avatar_url;
-        this.router.push('/');
+        router.push('/');
     };
 
     const logout=()=>{

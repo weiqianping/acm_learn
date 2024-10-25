@@ -71,6 +71,7 @@
           localStorage.setItem('token', response.token);
           
           localStorage.setItem('user', JSON.stringify(response.user));
+          //localStorage.setItem('user', response.user);
           // 更新全局状态
           this.login(response.user);
         } catch (error) {

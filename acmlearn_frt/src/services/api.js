@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance=axios.create({
-    baseURL:'http://124.222.94.181:800/api/',
+    baseURL:'http://127.0.0.1:8000/api/',
     withCreadentials:true,
 });
 
@@ -29,7 +29,7 @@ export default{
     //NavBar
     async login(email,username,password){
         try{
-            const response=await axiosInstance.post('login/',{
+            const response=await axiosInstance.post('profiles/login/',{
                 email,
                 username,
                 password
@@ -42,7 +42,7 @@ export default{
     },
     async register(email,username,password,code){
         try{
-            const response=await axiosInstance.post('register/',{
+            const response=await axiosInstance.post('profiles/register/',{
                 email,
                 username,
                 password,
